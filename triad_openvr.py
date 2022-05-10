@@ -70,10 +70,10 @@ class vr_tracked_device():
         self.vr = vr_obj
 
     def get_serial(self):
-        return self.vr.getStringTrackedDeviceProperty(self.index,openvr.Prop_SerialNumber_String).decode('utf-8')
+        return self.vr.getStringTrackedDeviceProperty(self.index,openvr.Prop_SerialNumber_String)
 
     def get_model(self):
-        return self.vr.getStringTrackedDeviceProperty(self.index,openvr.Prop_ModelNumber_String).decode('utf-8')
+        return self.vr.getStringTrackedDeviceProperty(self.index,openvr.Prop_ModelNumber_String)
 
     def sample(self,num_samples,sample_rate):
         interval = 1/sample_rate

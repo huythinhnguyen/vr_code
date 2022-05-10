@@ -29,7 +29,8 @@ class VirtualRealitySystem:
         msg = ''
         if self.dummy: return 'x y z yaw pitch roll'
         #print(self.vr_system.devices)
-        for i in self.vr_system.devices["tracker_1"].get_pose_euler(): msg += "%.3f " % i + " "
+        for i in self.vr_system.devices["tracker_1"].get_pose_euler(): msg += "%.5f " % i + " "
+        for i in self.vr_system.devices["tracker_1"].get_pose_euler(): msg += "%.5f " % i + " "
         msg.rstrip()
         return msg
 
@@ -55,6 +56,8 @@ class VirtualRealityServer:
     def send(self, data, connection):
         data = data + self.break_character
         connection.send(data.encode())
+        
+        
 
     def receive(self, connection):
         data = ''

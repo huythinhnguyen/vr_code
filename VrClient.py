@@ -56,7 +56,7 @@ class Client:
     def get_coordinates(self, to_list=True):
         coordinates = []
         data = self.send('cds')
-        print(data)
+        #print(data)
         data = data.rstrip(' ')
         if not to_list: return data
         for x in range(10): data = data.replace('  ', ' ')
@@ -68,6 +68,12 @@ class Client:
             except:
                 coordinates.append(x)
         return coordinates
+    
+    def get_trackers_coordinates(self, to_dict=True):
+        raw = self.get_coordinates()
+        coordinates = {'tracker_1': raw[:6], 'tracker_2': raw[6:]}
+        if to_dict: return coordinates
+        else: return coordinates['tracker_1'], coordinates['tracker_2']
 
     def disconnect(self):
         self.socket.close()
@@ -77,9 +83,12 @@ class Client:
 
 
 if __name__ == "__main__":
-    c = Client('192.168.0.173')
+    c = Client('192.168.8.166')
+    print('Client initiated')
     c.connect()
-    while 1:
-        received = c.get_coordinates()
-        print(received)
+    print('Client Connected')
+    for _ in range(100):
+        received = c.get_trackers_coordinates()
+        print(list(received.keys())[0], list(received.values())[0])
+        print(list(received.keys())[1], list(received.values())[1])
         time.sleep(1)
